@@ -114,23 +114,6 @@ end)
 Slider1:AddToolTip("Slider 1 ToolTip")
 Slider1:SetValue(50)
 
----------------------- A functioning dropdown
-
-local Dropdown1 = Section1:CreateDropdown("Dropdown", {"Example1","Example2","Example3", "Example4"}, function(String)
-    locationSelected = String
-end)
-
-local Button1 = Section1:CreateButton("Click this after selecting", function()
-    if locationSelected == "Example1" then
-            print("Whale is gay 1")
-        elseif locationSelected == "Example2" then
-            print("Whale is gay 2")
-        elseif locationSelected == "Example3" then
-             print("Whale is gay 3")
-        elseif locationSelected == "Example4" then
-            print("Whale is gay 4")
-    end
-end)
 
 ----------------------- Player Movement Section
 Section1:CreateLabel("Client Movement")
@@ -139,10 +122,6 @@ Section1:CreateLabel("Client Movement")
 local Slider1 = Section1:CreateSlider("Walkspeed", 16,500,16,true, function(Value)
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
 end)
-local Slider1 = Section1:CreateSlider("Jumppower", 50,500,50,true, function(Value)
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
-end)
-
 
 local Toggle2 = Section1:CreateToggle("Infinite jump", nil, function(State)
     toggle = State
@@ -158,6 +137,27 @@ local Toggle2 = Section1:CreateToggle("Infinite jump", nil, function(State)
                   end
             end
       end)
+end)
+
+local Toggle25 = Section1:CreateToggle("spinbot", nil, function(State)
+_G.spin = State
+
+while _G.spin do
+local anim = Instance.new("Animation", game.Players.LocalPlayer.Character)
+
+anim.AnimationId = "rbxassetid://188632011"
+   game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(anim):Play()
+    wait(0.25)
+   end
+end)
+
+local Toggle42 = Section1:CreateToggle("bhop", nil, function(State)
+_G.jumping = State
+		
+while _G.jumping do
+  game.Players.LocalPlayer.Character.Humanoid.Jump = true
+  wait()
+end
 end)
 
 -------------
