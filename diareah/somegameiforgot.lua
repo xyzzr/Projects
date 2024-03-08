@@ -162,11 +162,68 @@ end)
 
 -------------
 
-local Toggle3 = Section2:CreateToggle("Toggle 2\n sex", nil, function(State)
-	print(State)
-end)
-Toggle3:AddToolTip("Just a toggle with a multiline (/n)")
+getgenv().esp = false
+getgenv().teamcheck = false
+getgenv().Color = Color3.fromRGB(255, 0, 0)
 
+local Toggle3 = Section2:CreateToggle("Toggle Chams", nil, function(State)
+			getgenv().esp = State
+		spawn(function()
+		while wait() do
+		    if not getgenv().esp then
+		          for i,v in pairs(game.Players:GetChildren()) do
+		              if v.Character and v.Character:FindFirstChild("Highlight") then
+		                  local Highlight = v.Character:FindFirstChild("Highlight")
+		                  Highlight.Enabled = false
+    		      end
+		      end 
+		      else
+		          for i,v in pairs(game.Players:GetChildren()) do
+		             if getgenv().teamcheck == true then
+		               if v.Character and v ~= game.Players.LocalPlayer and v.TeamColor ~= game.Players.LocalPlayer.TeamColor then
+    		                 if v.Character:FindFirstChild("Highlight") then
+    		                 local Highlight = v.Character:FindFirstChild("Highlight") 
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		                 else
+    		                 local Highlight = Instance.new("Highlight",v.Character)
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		              end       
+    		           end  
+		                if v.TeamColor == game.Players.LocalPlayer.TeamColor then
+    		              if v.Character and v.Character:FindFirstChild("Highlight") then
+    		                  local Highlight = v.Character:FindFirstChild("Highlight")
+        		              Highlight.Enabled = false
+        		          end    
+    		            end 
+    		          else
+    		              if v.Character and v ~= game.Players.LocalPlayer then
+    		                 if v.Character:FindFirstChild("Highlight") then
+    		                 local Highlight = v.Character:FindFirstChild("Highlight") 
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		                 else
+    		                 local Highlight = Instance.new("Highlight",v.Character)
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		              end       
+    		           end    
+		            end       
+		      end    
+		    end  
+		end    
+		end)
+end)
+Toggle3:AddToolTip("Cham other players and see them trough walls")
+
+local Colorpicker1 = Section2:CreateColorpicker("Cham Color", function(Color)
+   getgenv().Color = Color
+end)
 
 ----------------------- Other Section
 Section2:CreateLabel("Other")
